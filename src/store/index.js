@@ -1,12 +1,20 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+
 import auth from './auth'
+import info from "./info";
+import currency from "./currency";
 
 Vue.use(Vuex);
+// Vue.use(VueLocalStorage, {
+//   name: 'ls',
+//   bind: true //created computed members from your variable declarations
+// });
 
 export default new Vuex.Store({
   state: {
-    error: null
+    error: null,
+    //ls: VueLocalStorage,
   },
   mutations: {
     setError(state, error) {
@@ -18,9 +26,8 @@ export default new Vuex.Store({
   getters: {
     error: state => state.error,
   },
-  actions: {
-  },
+  actions: {},
   modules: {
-    auth
+    auth, info, currency
   }
 })

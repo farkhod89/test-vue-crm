@@ -82,9 +82,11 @@
           password: this.password,
         };
 
-        this.$store.dispatch('login', formData)
-          .then(() => this.$router.push("/"))
-          .catch(e => e);
+        try {
+          await this.$store.dispatch('login', formData);
+          await this.$router.push("/");
+        } catch (e) {}
+
       },
     }
   }

@@ -1,23 +1,38 @@
 import Vue from 'vue';
 import Vuelidate from "vuelidate";
+import VueLocalStorage from 'vue-localstorage';
+
 import App from './App.vue';
 import './registerServiceWorker';
 import router from './router';
 import store from './store';
 import dateFilter from "./filters/date.filter";
+import currencyFormat from "./filters/currency.format";
 import messagePlugin from "./utils/message.plugin";
+import Loader from "./components/app/Loader";
+
 import "materialize-css/dist/js/materialize.min";
 
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/database'
 
-
 Vue.config.productionTip = false;
 
 Vue.use(Vuelidate);
+
+Vue.use(VueLocalStorage)
+// Vue.use(VueLocalStorage, {
+//   name: 'ls',
+//   bind: true //created computed members from your variable declarations
+// });
+
+
 Vue.filter("date", dateFilter);
+Vue.filter("currencyFormat", currencyFormat);
+
 Vue.use(messagePlugin);
+Vue.component("Loader", Loader);
 
 firebase.initializeApp({
   apiKey: "AIzaSyAE5MJ4TUPIgTfRypS0s3nHhivzC5kZu0Y",

@@ -2,8 +2,9 @@ import firebase from "firebase/app";
 
 export default {
   actions: {
-    async logout() {
+    async logout({commit}) {
       await firebase.auth().signOut();
+      commit("clearInfo");
     },
     async login({dispatch, commit}, {email, password}) {
       try {
