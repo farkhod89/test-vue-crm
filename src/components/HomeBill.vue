@@ -16,7 +16,7 @@
     name: "HomeBill",
     props: ["rates"],
     data: () => ({
-      currencies: ["RUB", "USD", "EUR", "UZS"],
+      currencies: ["USD","RUB", "EUR", "UZS"],
     }),
     computed: {
       base() {

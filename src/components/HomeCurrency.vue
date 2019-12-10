@@ -31,7 +31,7 @@
     name: "HomeCurrency",
     props: ["rates", "date"],
     data: () => ({
-      currencies: ["RUB", "USD", "EUR", "UZS"],
+      currencies: ["USD","RUB", "EUR", "UZS"],
     }),
     methods: {
       getCurrency(currency) {
