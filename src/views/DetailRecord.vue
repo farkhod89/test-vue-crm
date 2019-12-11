@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="breadcrumb-wrap">
-      <a href="/history" class="breadcrumb">История</a>
+      <router-link to="/history" class="breadcrumb">История</router-link>
       <a class="breadcrumb">
         Расход
       </a>
@@ -13,7 +13,6 @@
             <p>Описание:</p>
             <p>Сумма:</p>
             <p>Категория:</p>
-
             <small>12.12.12</small>
           </div>
         </div>
