@@ -30,6 +30,19 @@
       if (!Object.keys(this.$store.getters.info).length) {
         await this.$store.dispatch("fetchInfo");
       }
+
+      //Vue.localStorage.get("info")
+      //console.log(this.$localStorage.get("info"));
+
+      // const localInfo = this.$localStorage.get("info");
+      // if (!Object.keys(localInfo).length) {
+      //   console.log("!")
+      //   await this.$store.dispatch("fetchInfo");
+      // } else {
+      //   // console.log("3")
+      //   // console.log(JSON.parse(localInfo));
+      //   //this.$store.commit("setInfo", localInfo)
+      // }
     },
     components: {
       Navbar, Sidebar

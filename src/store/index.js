@@ -5,6 +5,7 @@ import auth from './auth'
 import info from "./info";
 import currency from "./currency";
 import category from "./category";
+import record from "./record";
 
 Vue.use(Vuex);
 // Vue.use(VueLocalStorage, {
@@ -29,6 +30,6 @@ export default new Vuex.Store({
   },
   actions: {},
   modules: {
-    auth, info, currency, category
+    auth, info, currency, category, record
   }
 })

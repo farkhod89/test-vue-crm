@@ -25,15 +25,35 @@ export default {
         const info = (await firebase.database().ref(`/users/${uid}/info`).once("value")).val();
         commit("setInfo", info);
       } catch (e) {
+        commit("setError", e);
         console.log(e);
       }
     },
+
+    async infoUpdate({dispatch, commit, getters}, toUpdate) {
+      try {
+        const uid = await dispatch("getUid");
+
+        const updateData = {...getters.info, ...toUpdate};
+
+        await firebase.database()
+          .ref(`/users/${uid}/info`)
+          .update(updateData);
+
+        commit("setInfo", updateData);
+
+      } catch (e) {
+        commit("setError", e);
+        console.log(e);
+      }
+    }
   },
   getters: {
     info: (state) => {
-      if (Vue.localStorage.get("info")) {
-        return JSON.parse(Vue.localStorage.get("info"));
-      }
+      // console.log(Vue.localStorage.get("info"))
+      // if (Vue.localStorage.get("info")) {
+      //   return JSON.parse(Vue.localStorage.get("info"));
+      // }
       return state.info
     },
   },

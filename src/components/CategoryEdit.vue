@@ -45,7 +45,7 @@
           class="helper-text invalid"
           v-else-if="(!$v.limit.minValue && $v.limit.$dirty)"
         >
-          Минимальное значение {{ this.$v.limit.$params.minValue.min }} $
+          Минимальное значение {{ this.$v.limit.$params.minValue.min }}$
         </small>
       </div>
       <button class="btn waves-effect waves-light" type="submit">Обновить<i
@@ -56,7 +56,6 @@
 
 <script>
   import {required, minValue} from "vuelidate/lib/validators"
-  import {mapActions} from "vuex"
 
   export default {
     name: "CategoryEdit",
