@@ -8,6 +8,8 @@ import router from './router';
 import store from './store';
 import dateFilter from "./filters/date.filter";
 import currencyFormat from "./filters/currency.format";
+import tooltipDirective from "./directives/tooltip.directive";
+
 import messagePlugin from "./utils/message.plugin";
 import Loader from "./components/app/Loader";
 
@@ -30,6 +32,7 @@ Vue.use(VueLocalStorage)
 
 Vue.filter("date", dateFilter);
 Vue.filter("currencyFormat", currencyFormat);
+Vue.directive("tooltip", tooltipDirective);
 
 Vue.use(messagePlugin);
 Vue.component("Loader", Loader);
