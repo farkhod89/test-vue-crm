@@ -16,7 +16,16 @@
         <canvas></canvas>
       </div>
       <section>
-        <HistoryTable :records="records"/>
+        <HistoryTable :records="items"/>
+        <Paginate
+          v-model="page"
+          :page-count="pageCount"
+          :click-handler="pageChangeHandler"
+          :prev-text="'Назад'"
+          :next-text="'Вперед'"
+          :container-class="'pagination'"
+          :page-class="'waves-effect'"
+        />
       </section>
     </div>
   </div>
@@ -25,33 +34,33 @@
 <script>
   import HistoryTable from "../components/HistoryTable";
   import {mapActions, mapGetters} from "vuex";
+  import paginationMixin from "../mixins/pagination.mixin";
 
   export default {
     name: "History",
     data: () => ({
       loading: true,
-      categories: [],
       records: [],
     }),
     computed: {},
+    mixins: [paginationMixin],
     methods: {
       ...mapActions(['fetchCategories', "fetchRecords"]),
     },
     async mounted() {
       const categories = await this.fetchCategories();
-      const records = await this.fetchRecords();
+      this.records = await this.fetchRecords();
 
-      this.records = records.map(r => {
+      const data = this.records.map(r => {
         return {
           ...r,
           categoryTitle: categories.find(c => c.id === r.categoryId).title,
           typeClass: r.type === "income" ? "green" : "red",
           typeText: r.type === "income" ? "Доход" : "Расход",
-
         };
       });
-      this.categories = categories;
 
+      this.setupPagination(data);
       this.loading = false;
     },
     components: {

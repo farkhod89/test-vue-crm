@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuelidate from "vuelidate";
 import VueLocalStorage from 'vue-localstorage';
+import Paginate from "vuejs-paginate";
 
 import App from './App.vue';
 import './registerServiceWorker';
@@ -22,8 +23,8 @@ import 'firebase/database'
 Vue.config.productionTip = false;
 
 Vue.use(Vuelidate);
-
-Vue.use(VueLocalStorage)
+Vue.use(VueLocalStorage);
+Vue.use(messagePlugin);
 // Vue.use(VueLocalStorage, {
 //   name: 'ls',
 //   bind: true //created computed members from your variable declarations
@@ -34,8 +35,8 @@ Vue.filter("date", dateFilter);
 Vue.filter("currencyFormat", currencyFormat);
 Vue.directive("tooltip", tooltipDirective);
 
-Vue.use(messagePlugin);
 Vue.component("Loader", Loader);
+Vue.component('Paginate', Paginate);
 
 firebase.initializeApp({
   apiKey: "AIzaSyAE5MJ4TUPIgTfRypS0s3nHhivzC5kZu0Y",
