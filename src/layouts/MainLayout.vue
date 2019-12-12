@@ -9,7 +9,10 @@
       </div>
     </main>
 
-    <div class="fixed-action-btn" v-tooltip="{html: 'Добавить новую запись', position: 'left'}">
+    <div
+      class="fixed-action-btn"
+      v-tooltip="{html: 'Добавить новую запись', position: 'left'}"
+    >
       <router-link class="btn-floating btn-large blue" to="/record">
         <i class="large material-icons">add</i>
       </router-link>
@@ -18,19 +21,19 @@
 </template>
 
 <script>
-  import Navbar from "../components/app/Navbar";
-  import Sidebar from "../components/app/Sidebar";
-  import messages from "../utils/messages";
+  import Navbar from '../components/app/Navbar';
+  import Sidebar from '../components/app/Sidebar';
+  import messages from '../utils/messages';
 
   export default {
-    name: "MainLayout",
+    name: 'MainLayout',
     data: () => ({
-      isOpen: true
+      isOpen: true,
     }),
     computed: {
       error() {
-        return this.$store.getters.error
-      }
+        return this.$store.getters.error;
+      },
     },
     watch: {
       error(fbError) {
@@ -40,7 +43,7 @@
     },
     async mounted() {
       if (!Object.keys(this.$store.getters.info).length) {
-        await this.$store.dispatch("fetchInfo");
+        await this.$store.dispatch('fetchInfo');
       }
 
       //Vue.localStorage.get("info")
@@ -57,11 +60,10 @@
       // }
     },
     components: {
-      Navbar, Sidebar
+      Navbar,
+      Sidebar,
     },
-  }
+  };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

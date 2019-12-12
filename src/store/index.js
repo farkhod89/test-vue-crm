@@ -1,11 +1,11 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from 'vue';
+import Vuex from 'vuex';
 
-import auth from './auth'
-import info from "./info";
-import currency from "./currency";
-import category from "./category";
-import record from "./record";
+import auth from './auth';
+import info from './info';
+import currency from './currency';
+import category from './category';
+import record from './record';
 
 Vue.use(Vuex);
 // Vue.use(VueLocalStorage, {
@@ -23,13 +23,17 @@ export default new Vuex.Store({
       //debugger
       state.error = error;
     },
-    clearError: state => state.error = null,
+    clearError: state => (state.error = null),
   },
   getters: {
     error: state => state.error,
   },
   actions: {},
   modules: {
-    auth, info, currency, category, record
-  }
-})
+    auth,
+    info,
+    currency,
+    category,
+    record,
+  },
+});

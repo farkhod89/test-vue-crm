@@ -1,4 +1,5 @@
-import _ from "lodash";
+import _ from 'lodash';
+
 export default {
   data() {
     return {
@@ -7,7 +8,7 @@ export default {
       pageCount: 0,
       allItems: [],
       items: [],
-    }
+    };
   },
   methods: {
     setupPagination(allItems) {
@@ -24,4 +25,4 @@ export default {
   // mounted() {
   //   this.page = Number(this.$route.query.page) || 1;
   // }
-}
+};

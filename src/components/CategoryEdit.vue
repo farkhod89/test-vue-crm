@@ -5,11 +5,8 @@
       <div class="input-field">
         <select id="category" ref="select" v-model="inSelected">
           <option value="-" selected disabled>Выберите категорию</option>
-          <option
-            v-for="c of categories"
-            :value="c.id"
-            :key="c.id"
-          >{{c.title}}
+          <option :key="c.id" :value="c.id" v-for="c of categories"
+          >{{ c.title }}
           </option>
         </select>
         <label for="category">Выберите категорию</label>
@@ -20,45 +17,48 @@
           type="text"
           v-model="$v.title.$model"
           :class="{invalid: $v.title.$error}"
-        >
+        />
         <label for="u-name">Название</label>
         <small
           class="helper-text invalid"
-          v-if="(!$v.title.required && $v.title.$dirty)"
+          v-if="!$v.title.required && $v.title.$dirty"
         >
           Данное поле обязательное
         </small>
       </div>
       <div class="input-field">
-        <input id="u-limit" type="number"
-               v-model.number="$v.limit.$model"
-               :class="{invalid: $v.limit.$error}"
-        >
+        <input
+          :class="{invalid: $v.limit.$error}"
+          id="u-limit"
+          type="number"
+          v-model.number="$v.limit.$model"
+        />
         <label for="u-limit">Лимит</label>
         <small
           class="helper-text invalid"
-          v-if="(!$v.limit.required && $v.limit.$dirty)"
+          v-if="!$v.limit.required && $v.limit.$dirty"
         >
           Данное поле обязательное
         </small>
         <small
           class="helper-text invalid"
-          v-else-if="(!$v.limit.minValue && $v.limit.$dirty)"
+          v-else-if="!$v.limit.minValue && $v.limit.$dirty"
         >
           Минимальное значение {{ this.$v.limit.$params.minValue.min }}$
         </small>
       </div>
-      <button class="btn waves-effect waves-light" type="submit">Обновить<i
-        class="material-icons right">send</i></button>
+      <button class="btn waves-effect waves-light" type="submit">
+        Обновить<i class="material-icons right">send</i>
+      </button>
     </form>
   </div>
 </template>
 
 <script>
-  import {required, minValue} from "vuelidate/lib/validators"
+  import {minValue, required} from 'vuelidate/lib/validators';
 
   export default {
-    name: "CategoryEdit",
+    name: 'CategoryEdit',
     props: {
       categories: {
         type: Array,
@@ -66,12 +66,12 @@
         default: [],
       },
       selected: {
-        default: "0"
+        default: '0',
       },
     },
     data: () => ({
       select: null,
-      title: "",
+      title: '',
       limit: 1,
       current: null,
     }),
@@ -105,7 +105,7 @@
           //M.updateTextFields();
           // //this.current = value;
           // this.$emit("changeSelected", value);
-        }
+        },
       },
     },
 
@@ -117,7 +117,7 @@
       },
       selected(value) {
         console.log(value);
-      }
+      },
     },
 
     methods: {
@@ -128,32 +128,31 @@
         }
 
         try {
-
           const categoryData = {
             id: this.current,
             title: this.title,
-            limit: this.limit
+            limit: this.limit,
           };
 
-          await this.$store.dispatch("categoryUpdate", categoryData);
+          await this.$store.dispatch('categoryUpdate', categoryData);
 
           //this.title = "";
           //this.limit = 1;
           //this.$v.$reset();
 
-
-          this.$message("Категория успешно обновлена");
-          this.$emit("update", categoryData);
-
+          this.$message('Категория успешно обновлена');
+          this.$emit('update', categoryData);
         } catch (e) {
-          console.log(e)
+          console.log(e);
         }
-      }
+      },
     },
     created() {
       // this.current = this.selected;
       // const {id, title, limit} = this.categories.slice(-1)[0];
-      const {id, title, limit} = this.categories.find(c => c.id === this.selected);
+      const {id, title, limit} = this.categories.find(
+        c => c.id === this.selected,
+      );
       this.current = id;
       this.title = title;
       this.limit = limit;
@@ -166,10 +165,8 @@
       if (this.select && this.select.destroy) {
         this.select.destroy();
       }
-    }
-  }
+    },
+  };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

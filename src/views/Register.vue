@@ -3,53 +3,60 @@
     <div class="card-content">
       <span class="card-title">Домашняя бухгалтерия</span>
       <div class="input-field">
-        <input id="email"
-               type="text"
-               v-model.trim="$v.email.$model"
-               :class="{invalid: $v.email.$error}"
-        >
+        <input
+          :class="{invalid: $v.email.$error}"
+          id="email"
+          type="text"
+          v-model.trim="$v.email.$model"
+        />
         <label for="email">Email</label>
-        <small class="helper-text invalid"
-               v-if="(!$v.email.required && $v.email.$dirty)"
+        <small
+          class="helper-text invalid"
+          v-if="!$v.email.required && $v.email.$dirty"
         >
           Данное поле обязательное
         </small>
-        <small class="helper-text invalid"
-               v-else-if="(!$v.email.email && $v.email.$dirty)"
+        <small
+          class="helper-text invalid"
+          v-else-if="!$v.email.email && $v.email.$dirty"
         >
           Введите корректный Email
         </small>
       </div>
       <div class="input-field">
-        <input id="password" type="password"
-               v-model.trim="$v.password.$model"
-               :class="{invalid: $v.password.$error}">
+        <input
+          :class="{invalid: $v.password.$error}"
+          id="password"
+          type="password"
+          v-model.trim="$v.password.$model"
+        />
         <label for="password">Пароль</label>
         <small
           class="helper-text invalid"
-          v-if="(!$v.password.required && $v.password.$dirty)"
+          v-if="!$v.password.required && $v.password.$dirty"
         >
           Данное поле обязательное
         </small>
         <small
           class="helper-text invalid"
-          v-else-if="(!$v.password.minLength && $v.password.$dirty)"
+          v-else-if="!$v.password.minLength && $v.password.$dirty"
         >
           Минимальное значение поля 6 симв.
         </small>
       </div>
 
       <div class="input-field">
-        <input id="name"
-               type="text"
-               v-model.trim="$v.name.$model"
-               :class="{invalid: $v.name.$error}"
-        >
+        <input
+          :class="{invalid: $v.name.$error}"
+          id="name"
+          type="text"
+          v-model.trim="$v.name.$model"
+        />
 
         <label for="name">Имя</label>
         <small
           class="helper-text invalid"
-          v-if="(!$v.name.required && $v.name.$dirty)"
+          v-if="!$v.name.required && $v.name.$dirty"
         >
           Данное поле обязательное
         </small>
@@ -82,20 +89,21 @@
 </template>
 
 <script>
-  import {email, minLength, required} from "vuelidate/lib/validators";
+  import {email, minLength, required} from 'vuelidate/lib/validators';
+
   export default {
-    name: "Register",
+    name: 'Register',
     data: () => ({
-      email: "",
-      password: "",
-      name: "",
+      email: '',
+      password: '',
+      name: '',
       agree: false,
     }),
     validations: {
       email: {email, required},
       password: {required, minLength: minLength(6)},
       name: {required},
-      agree: {checked: v => v}
+      agree: {checked: v => v},
     },
     methods: {
       async sendHandler() {
@@ -111,33 +119,13 @@
         };
 
         // отправка запроса
-        this.$store.dispatch('register', formData)
-          .then(() => this.$router.push("/"))
+        this.$store
+          .dispatch('register', formData)
+          .then(() => this.$router.push('/'))
           .catch(e => e);
       },
-    }
-  }
+    },
+  };
 </script>
 
-<style scoped>
-
-</style>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<style scoped></style>

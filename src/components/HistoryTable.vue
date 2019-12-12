@@ -12,20 +12,23 @@
     </thead>
 
     <tbody>
-    <tr v-for="(r, idx) in records" :key="r.id">
-      <td>{{++idx}}</td>
-      <td>{{r.amount | currencyFormat("USD")}}</td>
-      <td>{{r.date | date("date") }}</td>
-      <td>{{r.categoryTitle}}</td>
+    <tr :key="r.id" v-for="(r, idx) in records">
+      <td>{{ ++idx }}</td>
+      <td>{{ r.amount | currencyFormat('USD') }}</td>
+      <td>{{ r.date | date('date') }}</td>
+      <td>{{ r.categoryTitle }}</td>
       <td>
-        <span class="white-text badge" :class="[r.typeClass]">{{r.typeText}}</span>
+          <span :class="[r.typeClass]" class="white-text badge">{{
+            r.typeText
+          }}</span>
       </td>
       <td>
         <button
-          v-tooltip="{html: 'Посмотреть запись', position: 'left'}"
-          class="btn-small btn"
           @click="$router.push('/detail/' + r.id)"
-        ><i class="material-icons">open_in_new</i>
+          class="btn-small btn"
+          v-tooltip="{html: 'Посмотреть запись', position: 'left'}"
+        >
+          <i class="material-icons">open_in_new</i>
         </button>
       </td>
     </tr>
@@ -35,16 +38,14 @@
 
 <script>
   export default {
-    name: "HistoryTable",
+    name: 'HistoryTable',
     props: {
       records: {
         required: true,
         type: Array,
       },
     },
-  }
+  };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

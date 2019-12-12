@@ -4,7 +4,10 @@
       <div class="card-content white-text">
         <span class="card-title">Счет в валюте</span>
         <p v-for="cur of currencies" :key="cur" class="currency-line">
-          <span>{{cur}}: {{( getCurrency(cur) || "-") | currencyFormat(cur) }}</span>
+          <span
+          >{{ cur }}:
+            {{ (getCurrency(cur) || '-') | currencyFormat(cur) }}</span
+          >
         </p>
       </div>
     </div>
@@ -13,24 +16,24 @@
 
 <script>
   export default {
-    name: "HomeBill",
-    props: ["rates"],
+    name: 'HomeBill',
+    props: ['rates'],
     data: () => ({
-      currencies: ["USD","RUB", "EUR", "UZS"],
+      currencies: ['USD', 'RUB', 'EUR', 'UZS'],
     }),
     computed: {
       base() {
-        return this.$store.getters.info.bill / (this.rates["USD"] / this.rates["EUR"]);
-      }
+        return (
+          this.$store.getters.info.bill / (this.rates['USD'] / this.rates['EUR'])
+        );
+      },
     },
     methods: {
       getCurrency(currency) {
         return Math.floor(this.base * this.rates[currency]);
       },
-    }
-  }
+    },
+  };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

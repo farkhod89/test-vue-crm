@@ -14,10 +14,10 @@
           </tr>
           </thead>
           <tbody>
-          <tr v-for="cur in currencies" :key="cur">
+          <tr :key="cur" v-for="cur in currencies">
             <td>{{ cur }}</td>
             <td>{{ getCurrency(cur).toFixed(5) }}</td>
-            <td>{{ date | date("date")}}</td>
+            <td>{{ date | date('date') }}</td>
           </tr>
           </tbody>
         </table>
@@ -28,19 +28,17 @@
 
 <script>
   export default {
-    name: "HomeCurrency",
-    props: ["rates", "date"],
+    name: 'HomeCurrency',
+    props: ['rates', 'date'],
     data: () => ({
-      currencies: ["USD","RUB", "EUR", "UZS"],
+      currencies: ['USD', 'RUB', 'EUR', 'UZS'],
     }),
     methods: {
       getCurrency(currency) {
-        return this.rates[currency] / this.rates["USD"];
+        return this.rates[currency] / this.rates['USD'];
       },
-    }
-  }
+    },
+  };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

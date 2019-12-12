@@ -1,6 +1,6 @@
 export default {
   bind(el, {value}) {
-    const position = value.position ? value.position : "top";
+    const position = value.position ? value.position : 'top';
     M.Tooltip.init(el, {html: value.html, position: position});
   },
   unbind(el) {
@@ -8,5 +8,5 @@ export default {
     if (tooltip && tooltip.destroy) {
       tooltip.destroy();
     }
-  }
-}
+  },
+};

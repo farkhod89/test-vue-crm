@@ -1,9 +1,9 @@
-export default function currencyFormat(number, currency = "USD") {
+export default function currencyFormat(number, currency = 'USD') {
   if (!isNaN(number)) {
     return new Intl.NumberFormat('ru-RU', {
-      style: "currency",
+      style: 'currency',
       //maximumSignificantDigits: 1,
-      currency
+      currency,
     }).format(number);
   }
   return number;

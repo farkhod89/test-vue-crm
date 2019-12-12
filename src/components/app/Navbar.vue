@@ -5,13 +5,18 @@
         <a href="#" @click.prevent="$emit('navbarClick')">
           <i class="material-icons black-text">dehaze</i>
         </a>
-        <span class="black-text">{{ date | date("datetime") }}</span>
+        <span class="black-text">{{ date | date('datetime') }}</span>
       </div>
 
       <ul class="right hide-on-small-and-down">
         <li>
-          <a ref="dropdown" class="dropdown-trigger black-text" href="#" data-target="dropdown">
-            {{ name || "Loader data..."}}
+          <a
+            class="dropdown-trigger black-text"
+            data-target="dropdown"
+            href="#"
+            ref="dropdown"
+          >
+            {{ name || 'Loader data...' }}
             <i class="material-icons right">arrow_drop_down</i>
           </a>
 
@@ -36,7 +41,7 @@
 
 <script>
   export default {
-    name: "Navbar",
+    name: 'Navbar',
     data: () => ({
       date: new Date(),
       interval: null,
@@ -54,7 +59,7 @@
 
       this.dropdown = M.Dropdown.init(this.$refs.dropdown, {
         constrainWidth: true,
-      })
+      });
     },
     beforeDestroy() {
       clearInterval(this.interval);
@@ -65,15 +70,11 @@
     },
     methods: {
       logout() {
-        this.$store.dispatch("logout").then(() => {
-          this.$router.push("/login?message=logout")
+        this.$store.dispatch('logout').then(() => {
+          this.$router.push('/login?message=logout');
         });
-      }
+      },
     },
-
-  }
+  };
 </script>
 
-<style scoped>
-
-</style>

@@ -9,30 +9,32 @@
             type="text"
             v-model="$v.title.$model"
             :class="{invalid: $v.title.$error}"
-          >
+          />
           <label for="c-name">Название</label>
           <small
             class="helper-text invalid"
-            v-if="(!$v.title.required && $v.title.$dirty)"
+            v-if="!$v.title.required && $v.title.$dirty"
           >
             Данное поле обязательное
           </small>
         </div>
         <div class="input-field">
-          <input id="c-limit" type="number"
-                 v-model.number="$v.limit.$model"
-                 :class="{invalid: $v.limit.$error}"
-          >
+          <input
+            :class="{invalid: $v.limit.$error}"
+            id="c-limit"
+            type="number"
+            v-model.number="$v.limit.$model"
+          />
           <label for="c-limit">Лимит</label>
           <small
             class="helper-text invalid"
-            v-if="(!$v.limit.required && $v.limit.$dirty)"
+            v-if="!$v.limit.required && $v.limit.$dirty"
           >
             Данное поле обязательное
           </small>
           <small
             class="helper-text invalid"
-            v-else-if="(!$v.limit.minValue && $v.limit.$dirty)"
+            v-else-if="!$v.limit.minValue && $v.limit.$dirty"
           >
             Минимальное значение {{ this.$v.limit.$params.minValue.min }} $
           </small>
@@ -46,14 +48,14 @@
 </template>
 
 <script>
-  import {required, minValue} from "vuelidate/lib/validators"
+  import {minValue, required} from 'vuelidate/lib/validators';
 
-  import {mapActions} from "vuex"
+  import {mapActions} from 'vuex';
 
   export default {
-    name: "CategoryCreate",
+    name: 'CategoryCreate',
     data: () => ({
-      title: "",
+      title: '',
       limit: 1,
     }),
     validations: {
@@ -71,31 +73,31 @@
         try {
           const newCategory = {
             title: this.title,
-            limit: this.limit
+            limit: this.limit,
           };
 
           //await this.categoryCreate(newCategory);
 
-          const category = await this.$store.dispatch("categoryCreate", newCategory);
+          const category = await this.$store.dispatch(
+            'categoryCreate',
+            newCategory,
+          );
 
-          this.title = "";
+          this.title = '';
           this.limit = 1;
           this.$v.$reset();
-          this.$message("Категория успешно добавлена");
+          this.$message('Категория успешно добавлена');
 
-          this.$emit("created", category);
-
+          this.$emit('created', category);
         } catch (e) {
-          console.log(e)
+          console.log(e);
         }
-      }
+      },
     },
     mounted() {
       M.updateTextFields();
-    }
-  }
+    },
+  };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

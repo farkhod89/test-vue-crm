@@ -2,7 +2,7 @@
   <div>
     <div class="page-title">
       <h3>Планирование</h3>
-      <h4>{{bill | currencyFormat("USD")}}</h4>
+      <h4>{{ bill | currencyFormat('USD') }}</h4>
     </div>
 
     <Loader v-if="loading"/>
@@ -15,14 +15,14 @@
     <section v-else>
       <div v-for="c in categories" :key="c.id">
         <p>
-          <strong>{{c.title}}:</strong>
-          {{c.spend | currencyFormat("USD")}} из {{c.limit | currencyFormat("USD")}}
+          <strong>{{ c.title }}:</strong>
+          {{ c.spend | currencyFormat('USD') }} из
+          {{ c.limit | currencyFormat('USD') }}
         </p>
         <div class="progress" v-tooltip="{html: c.tooltip, position: 'top'}">
           <div
             class="determinate"
             :class="[c.progressColor]"
-
             :style="{width: c.processPercent + '%'}"
           ></div>
         </div>
@@ -32,11 +32,11 @@
 </template>
 
 <script>
-  import {mapGetters, mapActions} from "vuex";
-  import currencyFormat from "../filters/currency.format";
+  import {mapActions, mapGetters} from 'vuex';
+  import currencyFormat from '../filters/currency.format';
 
   export default {
-    name: "Planning",
+    name: 'Planning',
     data: () => ({
       loading: true,
       categories: [],
@@ -49,7 +49,7 @@
       },
     },
     methods: {
-      ...mapActions(['fetchCategories', "fetchRecords"]),
+      ...mapActions(['fetchCategories', 'fetchRecords']),
     },
     async mounted() {
       const categories = await this.fetchCategories();
@@ -58,22 +58,21 @@
       this.categories = categories.map(c => {
         const spend = records
           .filter(r => r.categoryId === c.id)
-          .filter(r => r.type === "outcome")
+          .filter(r => r.type === 'outcome')
           .reduce((total, record) => {
-            return total += +record.amount
+            return (total += +record.amount);
           }, 0);
 
-        const percent = (100 * spend / c.limit);
+        const percent = (100 * spend) / c.limit;
         const processPercent = percent > 100 ? 100 : percent;
 
-        const progressColor = percent < 60
-          ? "green"
-          : percent < 100
-            ? "yellow"
-            : "red";
+        const progressColor =
+          percent < 60 ? 'green' : percent < 100 ? 'yellow' : 'red';
 
         const tooltipValue = c.limit - spend;
-        const tooltip = `${tooltipValue < 0 ? 'Превышение на ' : 'Осталось '} ${currencyFormat(Math.abs(tooltipValue), "USD")}`;
+        const tooltip = `${
+          tooltipValue < 0 ? 'Превышение на ' : 'Осталось '
+        } ${currencyFormat(Math.abs(tooltipValue), 'USD')}`;
 
         return {
           ...c,
@@ -81,13 +80,11 @@
           processPercent,
           spend,
           tooltip,
-        }
+        };
       });
       this.loading = false;
     },
-  }
+  };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

@@ -9,11 +9,8 @@
       <div class="input-field">
         <select ref="select" id="category" v-model="category">
           <option value="-" selected disabled>Выберите категорию</option>
-          <option
-            v-for="c of categories"
-            :value="c.id"
-            :key="c.id"
-          >{{c.title}}
+          <option :key="c.id" :value="c.id" v-for="c of categories"
+          >{{ c.title }}
           </option>
         </select>
         <label for="category">Выберите категорию</label>
@@ -51,17 +48,17 @@
           type="number"
           v-model.number="$v.amount.$model"
           :class="{invalid: $v.amount.$error}"
-        >
+        />
         <label for="amount">Сумма</label>
         <small
           class="helper-text invalid"
-          v-if="(!$v.amount.required && $v.amount.$dirty)"
+          v-if="!$v.amount.required && $v.amount.$dirty"
         >
           Данное поле обязательное
         </small>
         <small
           class="helper-text invalid"
-          v-else-if="(!$v.amount.minValue && $v.amount.$dirty)"
+          v-else-if="!$v.amount.minValue && $v.amount.$dirty"
         >
           Минимальное значение {{ this.$v.amount.$params.minValue.min }}$
         </small>
@@ -73,11 +70,11 @@
           type="text"
           v-model.trim="$v.description.$model"
           :class="{invalid: $v.description.$error}"
-        >
+        />
         <label for="description">Описание</label>
         <small
           class="helper-text invalid"
-          v-if="(!$v.description.required && $v.description.$dirty)"
+          v-if="!$v.description.required && $v.description.$dirty"
         >
           Данное поле обязательное
         </small>
@@ -92,25 +89,25 @@
 </template>
 
 <script>
-  import {required, minValue} from "vuelidate/lib/validators"
-  import {mapGetters, mapActions} from "vuex";
+  import {minValue, required} from 'vuelidate/lib/validators';
+  import {mapActions, mapGetters} from 'vuex';
 
   export default {
-    name: "Record",
+    name: 'Record',
     data: () => ({
       loading: true,
       select: null,
       categories: [],
 
       category: null,
-      type: "income",
+      type: 'income',
       amount: null,
       description: null,
     }),
     computed: {
       ...mapGetters(['info']),
       canCreateRecord() {
-        if ("income" === this.type) {
+        if ('income' === this.type) {
           return true;
         }
         return this.bill >= this.amount;
@@ -126,7 +123,7 @@
       description: {required},
     },
     async mounted() {
-      this.categories = await this.$store.dispatch("fetchCategories");
+      this.categories = await this.$store.dispatch('fetchCategories');
       this.loading = false;
 
       if (this.categories.length) {
@@ -143,7 +140,7 @@
       }
     },
     methods: {
-      ...mapActions(["recordCreate"]),
+      ...mapActions(['recordCreate']),
       async submitHandler() {
         this.$v.$touch();
         if (this.$v.$invalid) {
@@ -151,7 +148,7 @@
         }
 
         if (!this.canCreateRecord) {
-          this.$error(`Недостаточно денег на счету (${(this.amount - this.bill)})`);
+          this.$error(`Недостаточно денег на счету (${this.amount - this.bill})`);
           return false;
         }
 
@@ -164,26 +161,23 @@
             date: new Date().toJSON(),
           });
 
-          const bill = this.type === "income"
-            ? this.bill + this.amount
-            : this.bill - this.amount;
+          const bill =
+            this.type === 'income'
+              ? this.bill + this.amount
+              : this.bill - this.amount;
 
-          await this.$store.dispatch("infoUpdate", {bill});
-          this.$message("Запись успешно создана");
-
+          await this.$store.dispatch('infoUpdate', {bill});
+          this.$message('Запись успешно создана');
 
           this.$v.$reset();
           this.amount = null;
           this.description = null;
-
         } catch (e) {
           console.log(e);
         }
-      }
-    }
-  }
+      },
+    },
+  };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
